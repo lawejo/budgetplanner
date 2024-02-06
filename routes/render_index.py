@@ -14,14 +14,18 @@ def _():
         }
  
         for row in all_expenses_dict:
+            # if the expense is monthly, append it to every month
             if row["expenses_frequency"] == "1":
                 for month in year:
                     year[month].append(row)
+            # If the expense start on 01/01/24 and it is not a monthly payment
             if row["expenses_first_payment_date"] == datetime(2024, 1, 1).date() and row["expenses_frequency"] != "1":
                 month = 1     
+                # loop thought the relevant rows, start with 01/01/2024 and thereafter calculate their next month based on their frequency until the 12th month has been hit  
                 while month<= 12:
                     year[month].append(row)
                     month += int(row["expenses_frequency"])
+            # if the first payment is not 01/01/24, then append the row to the month that correlates to the first payment month
             if row["expenses_first_payment_date"] != datetime(2024, 1, 1).date():
                 row_date = int(row["expenses_first_payment_date"].strftime("%m").strip("0"))
                 year[row_date].append(row)
