@@ -1,0 +1,48 @@
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+section {
+  display: flex;
+}
+table {
+  margin: 0 0.5rem 0 0;
+  height: 100%;
+}
+
+tr,
+td,
+th {
+  border: solid 1px #0d47a1;
+}
+
+td {
+  height: 1.6rem;
+  width: 5rem;
+}
+th {
+  font-size: small;
+  height: 5rem;
+}
+.antal-faste-udgifter {
+  height: 1.6rem;
+}
+#udgifter-1-table td:first-of-type {
+  width: 15rem;
+}
+.udgift-titel {
+  font-weight: bold;
+}
+
+.udgift-titel,
+th {
+  color: #0d47a1;
+}
+.månedlige-udgifter-desc {
+  text-align: right;
+  border: none;
+}
+.månedlige-udgifter-desc > td {
+  border: none;
+}

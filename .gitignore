@@ -1,0 +1,8 @@
+*.env
+*__pycache__
+*.pyc
+Include
+Lib
+node_modules
+database.ini
+pyvenv.cfg
