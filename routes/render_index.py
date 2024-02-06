@@ -14,6 +14,10 @@ def _():
         }
  
         for row in all_expenses_dict:
+            # should delete row, if the last payment date is < (earlier in the year) than current month.
+            #TODO: test this
+            if row["expenses_last_payment_date"].strftime("%m").strip("0") > datetime.now().month:
+                del row
             # if the expense is monthly, append it to every month
             if row["expenses_frequency"] == "1":
                 for month in year:
