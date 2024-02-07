@@ -62,3 +62,8 @@ SELECT * FROM expenses WHERE expenses_first_payment_date, expenses_last_payment_
 
 
 UPDATE expenses SET '2024-01-01','9999-01-01' WHERE expenses_name = 'Fitness, Puregym';
+
+
+
+INSERT INTO expenses(expenses_name,expenses_single_expense,expenses_frequency,expenses_first_payment_date, expenses_last_payment_date,expenses_category)  
+VALUES('testFirstOfJan', 1104,'3','2024-01-01','2024-09-01','Øvrige omkostninger');

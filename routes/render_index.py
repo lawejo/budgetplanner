@@ -1,4 +1,6 @@
 from datetime import datetime
+from time import strftime
+from xml.etree.ElementTree import tostring
 from bottle import get, response, template
 import x
 
@@ -14,14 +16,18 @@ def _():
         }
  
         for row in all_expenses_dict:
-            # should delete row, if the last payment date is < (earlier in the year) than current month.
-            #TODO: test this
-            if row["expenses_last_payment_date"].strftime("%m").strip("0") > datetime.now().month:
-                del row
-            # if the expense is monthly, append it to every month
-            if row["expenses_frequency"] == "1":
+
+
+            # if expenses appear every month and have an undefined end date
+            if row["expenses_frequency"] == "1" and row["expenses_first_payment_date"] == datetime(2024, 1, 1).date() and row["expenses_last_payment_date"]==datetime(9999, 1, 1).date():
                 for month in year:
                     year[month].append(row)
+
+            if row["expenses_frequency"] == "1" and row["expenses_first_payment_date"] == datetime(2024, 1, 1).date() and row["expenses_last_payment_date"] != datetime(9999, 1, 1).date():
+                for month in year:
+                    if int(row["expenses_last_payment_date"].strftime("%m").strip("0")) >= month:
+                          year[month].append(row)
+
             # if the expense start on 01/01/24 and it is not a monthly payment
             if row["expenses_first_payment_date"] == datetime(2024, 1, 1).date() and row["expenses_frequency"] != "1":
                 month = 1     
@@ -29,23 +35,21 @@ def _():
                 while month<= 12:
                     year[month].append(row)
                     month += int(row["expenses_frequency"])
+
+
             # if the first payment is not 01/01/24, then append the row to the month that correlates to the first payment month
             if row["expenses_first_payment_date"] != datetime(2024, 1, 1).date():
                 row_date = int(row["expenses_first_payment_date"].strftime("%m").strip("0"))
-                year[row_date].append(row)
-                # should calculate the last payments for this variant, yet to be tested
-                #TODO: test this
                 month = row_date
                 while month<= 12:
                     year[month].append(row)
                     month += int(row["expenses_frequency"])
 
                      
-        for expense in year[10]:
-            if expense["expenses_frequency"] != "1":
-                print('*'*40)
-                print(f'FROM render_index.py = {expense}')
-                print('*'*40)
+        for row in year[10]:
+            print('*'*40)
+            print(f'FROM render_index.py = {row["expenses_name"]}')
+            print('*'*40)
                     
         return template("index")
     except Exception as e:
