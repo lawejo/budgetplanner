@@ -36,7 +36,10 @@ def database_query(query, is_modification):
 
         cur.close()
         connection.close()
-        return result
+        dict = [dict(row) for row in result]
+
+
+        return dict
     except Exception as e:
         print(e.args[1])
         if connection is not None and is_modification:

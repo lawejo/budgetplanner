@@ -6,6 +6,7 @@ import x
 ## Get CSS
 @get("/CSS/budget.css")
 def _():
+    
     return static_file("budget.css", root="./CSS")
 
 ###############

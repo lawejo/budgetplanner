@@ -1,0 +1,51 @@
+# Budgetplanner
+
+## How it should work:
+
+1. First of month receive email with link that leads to updating your income
+2. After updating your income, you receive an email with your bugdet for this month, showing monthly, quartely and bi-yearly expenses for the current month.
+3. The email should also included any quartely and bi-yearly expenses coming up within the next three months
+
+## Tech Stack
+
+- [Next.js 13](https://nextjs.org/docs)
+- [TypeScript](https://www.typescriptlang.org/docs/)
+- [TailwindCSS](https://tailwindcss.com/docs/installation)
+- [DaisyUI](https://daisyui.com/)
+- [Sequelize](https://sequelize.org/)
+
+### Tables
+
+- Expense_table - **Normal table**
+- Expense_category_table - **Look up table** // MISSING
+- Income_table - **Normal table**
+- Income_names - **Look up table** // MISSING
+
+## Flow
+
+12/03
+
+- Receive email asking you to input accurate Income_names
+- After income is updated an email is sent with an overview over this months net income
+
+## Views
+
+- Update incomes page
+- Expenses that shows all income with name, category, 1 expense and how many times a year its paid
+- Expenses shown over a year as a calender view
+- Income view
+
+## Todo
+
+- Subtract expenses from income in order to see what is leftover
+- When the income has been updated, trigger the subtraction and send email out with current budget
+- Make email phone friendly
+
+## What I have done
+
+- Postgress database hooked up with python backend
+- Tables for
+  - Income
+  - Expenses
+- Logic for placing expenses in the month they belong // calculate_expenses.python
+- Create email with expenses for a month that included the next three months of not quarterly and bi yearly expenses
