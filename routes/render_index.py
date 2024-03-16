@@ -6,14 +6,10 @@ import x
 @get("/")
 def _():
     try:
-        test = x.database_query('SELECT * FROM budget', is_modification=False)
-        print('*'*40)
-        print(f'FROM render_index.py = {test}')
-        print('*'*40)
-        # yearly_expenses = expenses.calculate_expenses()
-        # income = budget.calculate_budget()
+        yearly_expenses = expenses.calculate_expenses()
+        income = budget.calculate_budget()
    
-        # budget_calculation.monthly.budget()
+        budget_calculation.monthly.budget()
 
         return template("index")
     except Exception as e:
